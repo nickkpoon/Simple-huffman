@@ -15,18 +15,27 @@ struct freqTable
     node *table;
 };
 
-node * initializeArray(int size)
+node* initializeArray(int size)
 {
-    node array[27];
+    node * array = new node[size];
 
-    for (int i = 0; i < size; i++)
+    for (int i = 1; i < size; i++)
     {
-        char ascii = i + 97;
-        if (i = 27)
-            ascii = 32;
+        int ascii = i + 96;
 
-        array[i].character = ascii;
+
+
+        if (i == 27)
+        {
+            ascii = 32;
+        }
+
+        char a = ascii;
+
+        array[i].character = a;
         array[i].frequency = 0;
+
+        cout<<i<<" ... " << array[i].character<<endl; 
         
     }
     return array;
@@ -105,17 +114,17 @@ void build(node *array, int size)
 int main(int, char **)
 {
     ifstream fin;
-    int arrray[28];
     int ascii;
     char next;
 
-    node *farray;
+    node *farray = new node[28];
     farray = initializeArray(28);
 
-    for (int i = 0; i < 27; i++)
+    cout<<farray[5].character<<endl;
+    /*for (int i = 0; i < 27; i++)
     {
     	arrray[i] = 0;
-    }
+    }*/
 
     do
     {
@@ -130,20 +139,29 @@ int main(int, char **)
 
     while((next=fin.get())!=EOF)
     {
-    	cout<<next<<endl;
+    	//cout<<next<<endl;
         ascii = next;
         if(ascii == 32) //32 is ascii for space, does not align well with 'a' which is #97
         {
             ascii = 123; //97+26
         }
-        ascii = ascii-97;
-        arrray[ascii]++;
+        ascii = ascii-96;
+        //cout<<ascii<<endl;
+        farray[ascii].frequency = farray[ascii].frequency + 1;
     }
 
 
-    for (int i = 0; i < 27; i++)
+    for (int i = 1; i <= 27; i++)
     {
-    	cout<<arrray[i]<<endl;
+    	cout<<"character : "<<farray[i].character<<" frequency : "<<farray[i].frequency<<endl;
+    }
+
+    build(farray, 28);
+    cout<<"print build heap"<<endl;
+
+    for (int i = 1; i <= 27; i++)
+    {
+        cout<<"character : "<<farray[i].character<<" frequency : "<<farray[i].frequency<<endl;
     }
 
     return 0;
