@@ -1,2 +1,1 @@
-# CS130A2
-Project 2 for CS130A
+Simple huffman's algorithm implementation in C++
